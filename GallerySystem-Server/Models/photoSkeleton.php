@@ -1,14 +1,14 @@
 <?php 
 
 class PhotoSkeleton{
-    private static $photoId;
-    private static $title;
-    private static $description;
-    private static $photoTag;
-    private static $userId;
-    private static $photoBase;
+    public static $photoId;
+    public static $title;
+    public static $description;
+    public static $photoTag;
+    public static $userId;
+    public static $photoBase;
 
-    public function __construct($photoBase,$title,$description,$photoTag,$userId)
+    public function createPhoto($photoBase,$title,$description,$photoTag,$userId)
     {
         self::$photoBase =$photoBase;
         self::$title =$title;

@@ -65,7 +65,7 @@ class User extends UserSkeleton{
     }
 
     // hash a password and compare it to hashed password
-    public function verifyPassword($enteredPassword, $storedPassword){
+    public static function verifyPassword($enteredPassword, $storedPassword){
         $hash_password = hash('sha256',$enteredPassword);
         if($hash_password == $storedPassword){
             return true;

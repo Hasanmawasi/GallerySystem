@@ -1,11 +1,22 @@
 
 import './css/App.css'
-// import Login from './pages/login'
-import Signup from './pages/signup'
+import Home from './pages/Home'
+import Login from './pages/login';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Signup from './pages/signup';
+import UploadPh from './pages/UploadPh';
+
 function App() {
   
   return (
-   <Signup/>
+   <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/home' element={<Home />} /> 
+        <Route path='/uploadphoto' element={<UploadPh />} /> 
+      </Routes>
+   </BrowserRouter>
   )
 }
 

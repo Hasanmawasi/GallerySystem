@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../components/Button.jsx';
 import InputField from '../components/InputField.jsx';
-
+import { Link } from 'react-router-dom';
 import "../css/index.css";
 
 const Signup = () => {
@@ -19,6 +19,7 @@ const Signup = () => {
                     onChange={
                         (e)=> setUsername(e.target.value)
                     }
+                    style="mt-4"
                     />
                     <InputField
                     type='text'
@@ -27,6 +28,8 @@ const Signup = () => {
                     onChange={
                         (e)=> setEmail(e.target.value)
                     }
+                    style="mt-4"
+
                     />
                     <InputField
                     type='password'
@@ -35,9 +38,11 @@ const Signup = () => {
                     onChange={
                         (e)=> setPassword(e.target.value)
                     }
+                    style="mt-4"
+
                     />
                     <div className='form-link mt-3'> 
-                    <p>Create an acount? <a href="">Sign up</a></p>
+                    <p>Already Have an acount? <Link to="/login">Login</Link></p>
                     </div>
                     <Button
                      label="Submit"

@@ -33,6 +33,40 @@ class Photo extends PhotoSkeleton{
             }
             return false;
         }
+        public static function deletePhoto($photo_id){
+            global $conn;
+            $sql = "DELETE FROM photos WHERE photo_id = ?;";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i",$photo_id);
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }
+        public static function uploadimage(){
+            if (!isset($_FILES['image'])) {
+                echo json_encode(["success" => false, "message" => "No image uploaded"]);
+                exit;
+            }
+            if (!isset($_POST['title']) || !isset($_POST['description']) ||!isset($_POST['tag']) ||!isset($_POST['user_id']) ) {
+                echo json_encode(["success" => false, "message" => "fill all the blank"]);
+                exit;
+            }
+            // move the image to images folder
+            $image = $_FILES['image'];
+            $uploadDir = __DIR__."/../images/";
+            $filename = uniqid() . "_" . basename($image["name"]);
+            $uploadPath = $uploadDir . $filename;
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }        
+            // Move the uploaded file to the uploads folder
+            if (move_uploaded_file($image["tmp_name"], $uploadPath)) {
+                // Store only the image URL in the database
+                $imageUrl = "http://localhost/" . $uploadPath;
+                return  $imageUrl;
+                   }
+        }
 }
 
 

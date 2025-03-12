@@ -3,19 +3,16 @@ include(__DIR__."/../../Utils/header.php");
 
 require(__DIR__."/../../Models/User.php");
 
-
+require_once(__DIR__."/../../Utils/checkempty.php");
 
 class UserController{
   
     static function registerUser(){
 
        $data = json_decode(file_get_contents("php://input"),true);
-        
-      if(empty($data['email']) || empty($data['password']) || empty($data['username'])){
-
-           return json_encode(["success"=>false,"message"=>"fill all the Blanks !!"]);
-
-         }
+       
+      //method to check empty data
+       checkEmpty($data['email'],$data['password'],empty($data['username']));
 
         UserSkeleton::createUser($data['username'], $data['email'],$data['password']);
         
@@ -26,12 +23,9 @@ class UserController{
 
     static function login(){
       $data = json_decode(file_get_contents("php://input"),true);
-        
-      if(empty($data['email']) || empty($data['password'])){
+      //method to check empty data
+        checkEmpty($data['email'],$data['password']);
 
-           return json_encode(["success"=>false,"message"=>"fill all the Blanks !!"]);
-
-         }
          User::loginUser($data['email'],$data['password']);
 
     }

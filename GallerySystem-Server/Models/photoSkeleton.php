@@ -29,6 +29,14 @@ class PhotoSkeleton{
     public static function getPhotoUrl()  {
         return  self::$photo_url;
     }
+    public static function getPhotoInfo(){
+        return ["photo_id"=>self::$photoId,
+                "photo_title"=>self::$title,
+                "user_id"=>self::$userId,
+                "photo_url"=>self::$photo_url,
+                "photo_desc"=>self::$description,
+                "photo_tag"=>self::$photoTag ];
+         }
 }
 
 ?>

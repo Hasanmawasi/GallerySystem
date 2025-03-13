@@ -43,31 +43,67 @@ class Photo extends PhotoSkeleton{
             }
             return false;
         }
-        public static function uploadimage(){
-            if (!isset($_FILES['image'])) {
-                echo json_encode(["success" => false, "message" => "No image uploaded"]);
+        public static function uploadimage($dataImg){
+            
+            $base64String =$dataImg;
+            $dataParts = explode(',', $base64String);
+            
+            if (count($dataParts) !== 2) {
+                echo json_encode(["success" => false, "message" => "Invalid image format"]);
                 exit;
             }
-            if (!isset($_POST['title']) || !isset($_POST['description']) ||!isset($_POST['tag']) ||!isset($_POST['user_id']) ) {
-                echo json_encode(["success" => false, "message" => "fill all the blank"]);
-                exit;
-            }
+        
             // move the image to images folder
-            $image = $_FILES['image'];
+            // Extract mime type and image data
+            $mimeTypePart = $dataParts[0];
+            $imageData = $dataParts[1];
+    
+            // Get mime type
+            $mimeType = str_replace('data:', '', explode(';', $mimeTypePart)[0]);
+            
+            // Validate supported image types
+            $allowedMimeTypes = [
+                'image/png' => 'png',
+                'image/jpeg' => 'jpg',
+                'image/gif' => 'gif',
+                'image/webp' => 'webp'
+            ];
+            
+            if (!isset($allowedMimeTypes[$mimeType])) {
+                echo json_encode(["success" => false, "message" => "Unsupported image type"]);
+                exit;
+            }
+
+            // Decode base64 data
+            $decodedImage = base64_decode($imageData, true);
+            if ($decodedImage === false) {
+                echo json_encode(["success" => false, "message" => "Failed to decode image"]);
+                exit;
+            }
+
+            // Create upload directory if it doesn't exist
             $uploadDir = __DIR__."/../images/";
-            $filename = uniqid() . "_" . basename($image["name"]);
-            $uploadPath = $uploadDir . $filename;
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
-            }        
-            // Move the uploaded file to the uploads folder
-            if (move_uploaded_file($image["tmp_name"], $uploadPath)) {
-                // Store only the image URL in the database
-                $imageUrl = "http://localhost/" . $uploadPath;
-                return  $imageUrl;
-                   }
+            }
+
+            // Generate unique filename
+            $extension = $allowedMimeTypes[$mimeType];
+            $filename = uniqid() . '.' . $extension;
+            $uploadPath = $uploadDir . $filename;
+
+            // Save the image file
+            if (file_put_contents($uploadPath, $decodedImage) === false) {
+                echo json_encode(["success" => false, "message" => "Failed to save image"]);
+                exit;
+            }
+            // Construct image URL (adjust this path according to your server configuration)
+            $imageUrl = "http://localhost/images/" . $filename;
+            return $imageUrl;
         }
 }
+        
+
 
 
 

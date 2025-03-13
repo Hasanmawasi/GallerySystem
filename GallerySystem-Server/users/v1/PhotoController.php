@@ -9,10 +9,14 @@ class PhotoController{
 
 public static function addPhoto(){
     global $conn;
+    $data = json_decode(file_get_contents("php://input"),true);
+
+    checkEmpty($data['image'],$data['title'],$data['description'],$data['tag'],$data['user_id']);
+   
     //get the image url and add it ot images file
-    if( $imageUrl = Photo::uploadimage()){
+    if( $imageUrl = Photo::uploadimage($data['image'])){
       
-     Photo::createPhoto($imageUrl,$_POST['title'],$_POST['description'],$_POST['tag'],$_POST['user_id']);
+     Photo::createPhoto($imageUrl,$data['title'],$data['description'],$data['tag'],$data['user_id']);
        if(Photo::savePhoto()){
         echo json_encode(["success" => TRUE, "message" => "photo uploaded"]);
        }  

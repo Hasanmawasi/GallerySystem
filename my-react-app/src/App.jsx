@@ -1,7 +1,7 @@
 
 import './css/App.css'
-import Home from './pages/Home'
-import Login from './pages/login';
+import Home from './pages/Home.jsx'
+import Login from './pages/login.jsx';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Signup from './pages/signup';
 import UploadPh from './pages/UploadPh';

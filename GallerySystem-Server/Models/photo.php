@@ -43,16 +43,9 @@ class Photo extends PhotoSkeleton{
             }
             return false;
         }
-        public static function uploadimage(){
-            if (!isset($_POST['image'])) {
-                echo json_encode(["success" => false, "message" => "No image uploaded"]);
-                exit;
-            }
-            if (!isset($_POST['title']) || !isset($_POST['description']) || !isset($_POST['tag']) || !isset($_POST['user_id'])) {
-                echo json_encode(["success" => false, "message" => "Fill all the blanks"]);
-                exit;
-            }
-            $base64String = $_POST['image'];
+        public static function uploadimage($dataImg){
+            
+            $base64String =$dataImg;
             $dataParts = explode(',', $base64String);
             
             if (count($dataParts) !== 2) {
@@ -98,7 +91,7 @@ class Photo extends PhotoSkeleton{
             $extension = $allowedMimeTypes[$mimeType];
             $filename = uniqid() . '.' . $extension;
             $uploadPath = $uploadDir . $filename;
-            
+
             // Save the image file
             if (file_put_contents($uploadPath, $decodedImage) === false) {
                 echo json_encode(["success" => false, "message" => "Failed to save image"]);

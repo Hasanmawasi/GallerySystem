@@ -43,6 +43,19 @@ class Photo extends PhotoSkeleton{
             }
             return false;
         }
+        public static function getSpPhoto($photo_id){
+            global $conn;
+            $sql = "SELECT * FROM photos WHERE photo_id = ?;";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i",$photo_id);
+            if($stmt->execute()){
+                $result = $stmt->get_result();
+                if($result->num_rows > 0){
+                    return $result->fetch_assoc();
+                }
+            }
+            return false;
+        }
         public static function uploadimage($dataImg){
             
             $base64String =$dataImg;

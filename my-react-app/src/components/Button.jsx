@@ -1,11 +1,12 @@
 import React from "react";
 import "../css/index.css"
-const Button = ({ label, onClick, type = "button" }) => {
+const Button = ({ label, onClick, type = "button" ,btnType="submit-btn"}) => {
+    const style = `${btnType} mt-3`;
   return (
     <button
       type={type}
       onClick={onClick}
-      className="submit-btn mt-3"
+      className={style}
     >
       {label}
     </button>

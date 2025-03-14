@@ -1,5 +1,9 @@
 <?php 
-
+header("Access-Control-Allow-Origin: *");// allow the front end to access to the back end
+// allow the front end to access to the back end
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
+header("Content-Type: application/json");
 // Define your base directory 
 $base_dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -20,7 +24,9 @@ $apis = [
     '/login'    => ['controllers' => 'UserController', 'method' => 'login'],
     '/uploadphoto'         => ['controllers' => 'PhotoController', 'method' => 'addPhoto'],
     '/getphotos'         => ['controllers' => 'PhotoController', 'method' => 'getUserPhoto'],
-    '/deletephoto'         => ['controllers' => 'PhotoController', 'method' => 'deleteSpecPhoto']
+    '/deletephoto'         => ['controllers' => 'PhotoController', 'method' => 'deleteSpecPhoto'],
+    '/getphoto'         => ['controllers' => 'PhotoController', 'method' => 'getPhoto'],
+
 ];
 
 if (isset($apis[$request])) {

@@ -43,5 +43,14 @@ public static function deleteSpecPhoto(){
         return;
     }
 }
+   public static function getPhoto(){
+    $data = json_decode(file_get_contents("php://input"),true);
+    checkEmpty(empty($data['photo_id']));
+    if($photo=Photo::getSpPhoto($data['photo_id'])){
+        echo json_encode(["success"=>true,"photo"=>$photo]);
+        return ;
+    }
+    echo json_encode(["success"=>false,"message"=>"photo not found"]);
 
+   }
 }

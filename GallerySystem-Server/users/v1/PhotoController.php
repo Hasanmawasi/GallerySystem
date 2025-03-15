@@ -28,7 +28,7 @@ public static function addPhoto(){
 public static function getUserPhoto(){
     $data = json_decode(file_get_contents("php://input"),true);
 
-    checkEmpty(empty($data['user_id']));
+    checkEmpty($data['user_id']);
 
      echo json_encode(["success"=>true,"photos"=> Photo::getPhotos($data['user_id'])]);
 }
@@ -37,7 +37,7 @@ public static function getUserPhoto(){
 
 public static function deleteSpecPhoto(){
     $data = json_decode(file_get_contents("php://input"),true);
-    checkEmpty(empty($data['user_id']));
+    checkEmpty($data['photo_id']);
     if(Photo::deletePhoto($data['photo_id'])){
         echo json_encode(["success"=>true]);
         return;
@@ -45,12 +45,21 @@ public static function deleteSpecPhoto(){
 }
    public static function getPhoto(){
     $data = json_decode(file_get_contents("php://input"),true);
-    checkEmpty(empty($data['photo_id']));
+    checkEmpty($data['photo_id']);
     if($photo=Photo::getSpPhoto($data['photo_id'])){
         echo json_encode(["success"=>true,"photo"=>$photo]);
         return ;
     }
     echo json_encode(["success"=>false,"message"=>"photo not found"]);
-
+   }
+   public static function updatePhoto(){
+      $data = json_decode(file_get_contents("php://input"),true);
+      checkEmpty($data['photo_id'],$data['tag'],$data['desc'],$data['title']);
+      if(Photo::updatePhoto($data['photo_id'],$data['title'],$data['tag'],$data['desc'])){
+        echo json_encode(["success"=>true]);
+        return;
+      }
+      echo json_encode(["success"=>false]);
+      return;
    }
 }

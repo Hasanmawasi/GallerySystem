@@ -56,6 +56,17 @@ class Photo extends PhotoSkeleton{
             }
             return false;
         }
+        public static function updatePhoto($id,$title,$tag,$desc){
+            global $conn;
+            $sql = "UPDATE photos SET photo_title=? ,photo_tag=? ,photo_desc=? WHERE photo_id = ?;";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssi",$title,$tag,$desc,$id);
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+
+        }
         public static function uploadimage($dataImg){
             
             $base64String =$dataImg;
@@ -67,14 +78,14 @@ class Photo extends PhotoSkeleton{
             }
         
             // move the image to images folder
-            // Extract mime type and image data
+            // extract mime type and image data
             $mimeTypePart = $dataParts[0];
             $imageData = $dataParts[1];
     
-            // Get mime type
+            // get mime type of photo
             $mimeType = str_replace('data:', '', explode(';', $mimeTypePart)[0]);
             
-            // Validate supported image types
+            // allowed type of images
             $allowedMimeTypes = [
                 'image/png' => 'png',
                 'image/jpeg' => 'jpg',
@@ -87,32 +98,33 @@ class Photo extends PhotoSkeleton{
                 exit;
             }
 
-            // Decode base64 data
+            // decode base64 data
             $decodedImage = base64_decode($imageData, true);
             if ($decodedImage === false) {
                 echo json_encode(["success" => false, "message" => "Failed to decode image"]);
                 exit;
             }
 
-            // Create upload directory if it doesn't exist
+            // create upload directory if it doesn't exist
             $uploadDir = __DIR__."/../images/";
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
 
-            // Generate unique filename
+            // generate unique filename for each phto
             $extension = $allowedMimeTypes[$mimeType];
             $filename = uniqid() . '.' . $extension;
             $uploadPath = $uploadDir . $filename;
 
-            // Save the image file
+            // save the image file
             if (file_put_contents($uploadPath, $decodedImage) === false) {
                 echo json_encode(["success" => false, "message" => "Failed to save image"]);
                 exit;
             }
-            // Construct image URL (adjust this path according to your server configuration)
-            $imageUrl = "http://localhost/images/" . $filename;
+            // add file path
+            $imageUrl = "http://localhost/GallerySystem/GallerySystem-Server/images/" . $filename;
             return $imageUrl;
+          
         }
 }
         

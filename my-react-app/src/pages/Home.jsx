@@ -48,6 +48,7 @@ useEffect(()=>{
             title={photo.photo_title}
             tag={photo.photo_tag}
             desc={photo.photo_desc}
+            photo_id={photo.photo_id}
             />
             )
            }

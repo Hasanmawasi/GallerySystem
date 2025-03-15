@@ -280,6 +280,16 @@ outline: none;
   border-radius: 10px;
   object-fit: cover;
 }
+.successtext{
+  font-size: 18px;
+  font-weight: 800;
+  color: rgb(49, 189, 36);
+}
+.failtext{
+  font-size: 18px;
+  font-weight: 800;
+  color: rgb(189, 36, 36);
+}
 @media (min-width:0px) and (max-width:720px) {
   .login-card{
     width: 80%;

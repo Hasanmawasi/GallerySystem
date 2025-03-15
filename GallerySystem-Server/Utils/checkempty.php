@@ -4,7 +4,8 @@ function checkEmpty(...$values){
     
         foreach ($values as $key => $value) {
             if (empty($value)) {
-                return json_encode(["success" => false, "message" => "Fill all the blanks!"]);
+                echo json_encode(["success" => false, "message" => "Fill all the blanks!"]);
+                return;
             }
         }
         return false; 

@@ -10,16 +10,15 @@ import Editphoto from './pages/editphoto.jsx';
 function App() {
   
   return (
-   <BrowserRouter>
+   
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/home' element={<Home />} /> 
         <Route path='/uploadphoto' element={<UploadPh />} /> 
         <Route path='/ablum' element={<Album />} /> 
-        <Route path='/editphoto' element={<Editphoto />} /> 
+        <Route path='/editphoto/:id' element={<Editphoto />} /> 
       </Routes>
-   </BrowserRouter>
   )
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-const PhotoCard = ({title,desc,url,tag}) => {
+const PhotoCard = ({title,desc,url,tag,photo_id}) => {
 
     const navigate  = useNavigate();
     const Edit = ()=>{
-        navigate("/editphoto")
+        navigate(`/editphoto/${photo_id}`)
     }
     return (
         <div className='photo-card flex flex-col justify-center align-center'  onClick={Edit}>

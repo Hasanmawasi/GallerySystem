@@ -26,6 +26,7 @@ $apis = [
     '/getphotos'         => ['controllers' => 'PhotoController', 'method' => 'getUserPhoto'],
     '/deletephoto'         => ['controllers' => 'PhotoController', 'method' => 'deleteSpecPhoto'],
     '/getphoto'         => ['controllers' => 'PhotoController', 'method' => 'getPhoto'],
+    '/updatephoto'         => ['controllers' => 'PhotoController', 'method' => 'updatePhoto'],
 
 ];
 

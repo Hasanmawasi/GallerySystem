@@ -5,14 +5,14 @@ import PhotoCard from '../components/PhotoCard';
 import {request, BaseUrl} from '../utils/requests.js';
 const Home = () => {
 const [photos, setPhotos] = useState([]);
-
+const user_id = localStorage.getItem("user_id");
 const fetchData =async ()=>{
 try {
     const response = await request({
        method: "POST",
        url: (BaseUrl+"getphotos"),
         data:{
-            user_id:1
+            user_id,
         }
     });
     setPhotos(response.photos);
@@ -30,17 +30,11 @@ useEffect(()=>{
 
     return (
         <div>
-            <NavBar />
+            {/* <NavBar /> */}
             <SearchBar />
             <div className="container">
-            <PhotoCard
-            url="/gaming-chair.jpeg"
-            title="Gaming Chair"
-            tag="chairs"
-            desc="gaming chair for more confort"
-            />
-            
            {
+           photos.length > 0 ?
             photos.map((photo)=>
             <PhotoCard
             key={photo.photo_id}
@@ -50,8 +44,10 @@ useEffect(()=>{
             desc={photo.photo_desc}
             photo_id={photo.photo_id}
             />
-            )
-           }
+            ) :
+            <h1>Upload Yout Images</h1>
+           } 
+            
             </div>
           
         </div>

@@ -46,12 +46,10 @@ const UploadPh = () => {
    }
 
   }
-//   useEffect(()=>{
-//     console.log(base64Image)
-//   },[base64Image])
+
     return (
         <div >
-            <NavBar />
+            {/* <NavBar /> */}
             <div className="container flex-col justify-center align-center">
             <div className="login-card flex flex-col justify-center align-center ">
             <h1 className='mt-4 upload-title'>Upload your photo</h1>

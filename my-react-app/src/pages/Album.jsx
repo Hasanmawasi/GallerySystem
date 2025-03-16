@@ -4,7 +4,7 @@ import AlbumFolder from '../components/AlbumFolder';
 const Album = () => {
     return (
         <div>
-            <NavBar />
+            {/* <NavBar /> */}
             <h1 className='mt-4 upload-title'>Albums group according to tags</h1>
             <div className='container-albums flex flex-row flex-wrap'>
                 <AlbumFolder

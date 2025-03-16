@@ -7,7 +7,7 @@ A web-based **Photo Gallery Application** built with **React** for the frontend 
 - **Photo Management** – Users can upload, edit, delete, and view their photos.
 - **Albums & Tags** – Organize photos into albums using user-defined tags.
 - **Responsive UI** – Built with React for a seamless user experience.
-- **REST API Backend** – PHP handles API requests, database interactions, and user authentication.
+- **REST API Backend** – PHP handles API requests, database interactions.
 - **Database Integration** – MySQL is used for efficient photo and user data storage.
 
 ## Technologies Used
@@ -38,7 +38,15 @@ npm install
 # Start the React development server
 npm run dev
 ```
-### migration Setup 
+### migration  
+```
+# create a database gallery 
+#make sure to run users before photos
+#run:
+ http://localhost/GallerySystem/GallerySystem-Server/database/migration/users.php
+#then run:
+ http://localhost/GallerySystem/GallerySystem-Server/database/migration/users.php
 
+```
 
 

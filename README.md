@@ -45,7 +45,7 @@ npm run dev
 #run:
  http://localhost/GallerySystem/GallerySystem-Server/database/migration/users.php
 #then run:
- http://localhost/GallerySystem/GallerySystem-Server/database/migration/users.php
+ http://localhost/GallerySystem/GallerySystem-Server/database/migration/photos.php
 
 ```
 

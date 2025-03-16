@@ -42,6 +42,20 @@ class User extends UserSkeleton{
             return false;
         }
     }
+
+    public static function validateID($id){
+        global $conn;
+        $sql = "SELECT * FROM users WHERE user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i",$id);
+        if($stmt->execute()){
+            $result= $stmt->get_result();
+            if($result-> num_rows >0){
+                return true;
+            }
+            return false;
+        }
+    }
     // function to login user
     public static function loginUser($email,$enteredPassword){
         global $conn;
@@ -53,7 +67,7 @@ class User extends UserSkeleton{
             if($result-> num_rows >0){
                 $row =$result->fetch_assoc();
                 if(self::verifyPassword($enteredPassword,$row["password"])){
-                   echo json_encode(["success"=>true,"message"=>"user loged"]);
+                   echo json_encode(["success"=>true,"user_id"=>$row["user_id"]]);
                     return;
                 }
                 echo json_encode(["success"=>false,"message"=>"wrong password"]);

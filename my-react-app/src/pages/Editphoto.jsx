@@ -14,7 +14,9 @@ const Editphoto = () => {
         tag:"",
         desc:"",
         photo_url:"",
-    })
+    });
+  
+
     const [Update, setUpdate]= useState(false);
     const [faildUpdate, setFailUpdate]= useState(false);
     const getPhoto =async ()=>{
@@ -61,13 +63,11 @@ const Editphoto = () => {
         }
     }
     useEffect(()=>{
-        console.log("id",id)
         getPhoto();
-    },[])
-
+    },[]);
     return (
         <div>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className='container flex flex-col justify-center align-center'> 
                 <div className="edit-card g-2">
                     <img src={edit.photo_url || "/logo.png"} alt="" />

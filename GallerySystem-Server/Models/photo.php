@@ -67,6 +67,7 @@ class Photo extends PhotoSkeleton{
             return false;
 
         }
+        
         public static function uploadimage($dataImg){
             
             $base64String =$dataImg;
